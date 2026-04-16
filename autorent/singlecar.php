@@ -69,13 +69,14 @@
                 <img src="https://loremflickr.com/400/250/<?php echo $rida ['mark']; ?>" class="card-img-top" alt="audi">
             </div>
             <div class="col-sm-6">
-                <h2><?php echo $rida ['mark']." ".$rida ['model']; ?></h2>
-                <p>2010<?php echo $rida ['year']; ?></p>
-                <p>MOotor: <?php echo $rida ['engine']; ?></p>
-                <p>Kütus: <?php echo $rida ['fuel']; ?></p>
-                <p>Käigukast: <?php echo $rida ['transmission']; ?></p>
-                <p>Kohad: <?php echo $rida ['kohad']; ?></p>
-                <p>Hind: <?php echo $rida ['price']; ?>€/päev</p>
+                <h1><?php echo $rida["mark"]; ?> <?php echo $rida["model"]; ?></h1>
+                <p>Mootor:  <?php echo $rida["engine"]; ?></p>
+                <p>Kütus:  <?php echo $rida["fuel"]; ?></p>
+                <p>Aasta:  <?= $rida["year"]; ?></p>
+                <p>Staatus:  <?php echo $rida["status"]; ?></p>
+                <p>Käigukast:  <?php echo $rida["transmission"]; ?></p>
+                <p>Istmed:  <?php echo $rida["seats"]; ?></p>
+                <p class="fs-5">Hind:  <?php echo $rida["price"]; ?></p>
                 <a href="#" class="btn btn-dark w-100">Rendi auto</a>
             </div>
         </div>
