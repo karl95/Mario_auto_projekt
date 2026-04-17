@@ -71,7 +71,7 @@
                 <p>Kütus: <?php echo $rida ['fuel']; ?></p>
                 <p>Mootor: <?php echo $rida ['engine']; ?></p>
                 <p>Hind: <?php echo $rida ['price']; ?></p>
-                <a href="single_car.php" class="btn btn-dark w-100">Rendi</a>
+                <a href="singlecar.php" class="btn btn-dark w-100">Rendi</a>
                 </div>
             </div>
         </div>  
