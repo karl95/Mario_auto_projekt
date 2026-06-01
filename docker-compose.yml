@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: autorent-web
+    ports:
+      - "9002:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.6
+    container_name: autorent-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: cr_rent
+      MYSQL_USER: autorent
+      MYSQL_PASSWORD: autorent
+    volumes:
+      - ./db:/var/lib/mysql
+      - ./db_init/cr_rent.sql:/docker-entrypoint-initdb.d/init.sql
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: autorent-pma
+    restart: always
+    ports:
+      - "9001:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: password
