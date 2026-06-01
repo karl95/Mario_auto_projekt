@@ -1,0 +1,10 @@
+# Logs
+*.log
+db/*.log
+
+# Docker
+*.pid
+*.sock
+vendor/
+node_modules/
+.env
