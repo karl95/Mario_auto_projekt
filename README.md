@@ -135,24 +135,6 @@ EXIT;
 mariadb -u root autorent < database/backup.sql
 ```
 
----
-
-## 7. Ekraanitõmmised
-Lisa kausta:
-
-```bash
-database/screenshots/
-```
-
-Näiteks:
-- `mariadb-login.png`
-- `port-check.png`
-
-README sisse:
-```md
-![MariaDB login](database/screenshots/mariadb-login.png)
-![Port check](database/screenshots/port-check.png)
-
 Apache2 seadistamine ja leht oleks võrgus saadaval 
 
 Mario Auto Projekt — Apache2 seadistamise dokumentatsioon
