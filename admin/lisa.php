@@ -1,4 +1,5 @@
 <?php
+ob_start(); // <--- LISA SEE KÄSK SIIA!
 session_start();
 
 if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== true) {

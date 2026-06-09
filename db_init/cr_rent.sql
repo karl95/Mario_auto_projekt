@@ -37,8 +37,9 @@ CREATE TABLE `cars` (
   `transmission` varchar(50) NOT NULL DEFAULT 'automaat',
   `kohad` int(2) NOT NULL DEFAULT 5,
   `price` decimal(4,0) NOT NULL,
-  `image` varchar(255) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
+  `description` TEXT NULL,
   `seats` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
