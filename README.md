@@ -7,7 +7,7 @@ Ligipääs serverile:
 - Proxmox konsool
 - SSH ühendus:
 ```bash
-ssh karl@serveri_ip
+ssh karl@10.0.22.104
 ```
 
 Kasutajanimi sisaldab minu nime: `karl`
@@ -141,7 +141,7 @@ Mario Auto Projekt — Apache2 seadistamise dokumentatsioon
 See dokumentatsioon kirjeldab täpselt, kuidas seadistada Apache2 nii, et projekt autorent töötaks portil 9000 ja oleks kättesaadav võrgust aadressil:
 
 Kood
-http://10.0.22.104:9000/index.php
+http://10.0.22.104:9002/index.php
 
 1. Apache2 teenusefaili parandamine (kriitiline)
 Kui Apache ei käivitu ja annab vead:
@@ -186,7 +186,7 @@ sudo systemctl restart apache2
 Fail: /etc/apache2/ports.conf
 
 Kood
-Listen 0.0.0.0:9000
+Listen 0.0.0.0:9002
 Kõik teised Listen read kustutada.
 
 🏠 3. VirtualHost seadistus
@@ -195,7 +195,7 @@ Fail: /etc/apache2/sites-enabled/000-default.conf
 Kogu sisu peab olema ainult see:
 
 Kood
-<VirtualHost *:9000>
+<VirtualHost *:9002>
     ServerName 10.0.22.104
     DocumentRoot /var/www/html/autorent
 
@@ -208,26 +208,15 @@ Kood
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 
-Kontrolli, et DocumentRoot kaust eksisteerib:
-Kood
-/var/www/html/autorent/index.php
 
-🔍 4. Kontroll: kas Apache kasutab õiget VirtualHosti?
-Kood
-apache2ctl -S
-Oodatav tulemus:
 
-Kood
-*:9000 10.0.22.104 (/etc/apache2/sites-enabled/000-default.conf:1)
-Kui see rida on olemas → VirtualHost töötab.
+Sain projekti Dockeri ja andmebaasi osa lõpuks korda. Varasem probleem seisnes selles, et rakendus üritas sisevõrgus pöörduda localhost poole, kuid Dockeri keskkonnas on andmebaasi õigeks hostiks teenuse nimi db. Samuti korrastasin andmebaasi skeemi puuduvad veerud ja parandasin PHP suunamiste loogika (headers already sent viga). Projekt on seadistatud nii, et selle saab nüüd sinu masinas käima tõmmata üheainsa käsuga.
 
-🌍 5. Õige URL projekti avamiseks
-Kuna DocumentRoot on /autorent, siis URL EI OLE:
-Kood
-/autorent/index.php
-Õige URL on:
-Kood
-http://10.0.22.104:9000/index.php
-
-curl -v http://10.0.22.104:9000
-
+Kuidas projekti käivitada: 
+Kloonige repositoorium oma masinasse. Vaata et juurkaustas(/var/www/html) on olemas andmebaasi ühenduse fail config.php 
+järgmiste konfiga (mis ühtivad docker-compose.yml MariaDB keskkonnamuutujatega):php$db_server = 'db';
+$db_andmebaas = 'cr_rent';
+$db_kasutaja = 'autorent';
+$db_salasona = 'autorent';
+Pane juurkaustas käsk: docker compose up -d --build
+Ava oma masinas: rakenduse avaleht: http://localhost:9002/index.php
