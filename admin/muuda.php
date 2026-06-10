@@ -36,10 +36,12 @@ if (isset($_GET["updateid"])) {
     $model = $_GET['model'] ?? '';
     $engine = $_GET['engine'] ?? '';
     $fuel = $_GET['fuel'] ?? '';
-    $price = $_GET['price'] ?? '';
-    $year = $_GET['year'] ?? '';
+    
+    $price = (!empty($_GET['price'])) ? floatval($_GET['price']) : 0;
+    $year = (!empty($_GET['year'])) ? intval($_GET['year']) : 0;
+    $seats = (!empty($_GET['seats'])) ? intval($_GET['seats']) : 0;
+    
     $transmission = $_GET['transmission'] ?? '';
-    $seats = $_GET['seats'] ?? '';
     $description = $_GET['description'] ?? '';
     $status = $_GET['status'] ?? '';
 
@@ -49,10 +51,10 @@ if (isset($_GET["updateid"])) {
             model = '$model',
             engine = '$engine',
             fuel = '$fuel',
-            price = '$price',
-            year = '$year',
+            price = $price,
+            year = $year,
             transmission = '$transmission',
-            seats = '$seats',
+            seats = $seats,
             description = '$description',
             status = '$status'
         WHERE id = $id
